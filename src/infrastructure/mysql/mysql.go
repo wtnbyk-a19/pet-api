@@ -21,9 +21,9 @@ func NewDbConnection() *DbConnection {
 }
 
 func dbConnect() (connection *gorm.DB) {
-	error := godotenv.Load()
+	error := godotenv.Load(".env")
 	if error != nil {
-		logrus.Fatal("Error loading .env file")
+		logrus.Fatal(error)
 	}
 
 	connection, error = gorm.Open("mysql",
