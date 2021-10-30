@@ -1,18 +1,21 @@
 version: '3'
+
 services:
   api: # service名
     build:
       context: .
-      dockerfile: Dockerfile
-    command: /bin/sh -c "go run main.go"
+      dockerfile: ./docker/api/Dockerfile
     stdin_open: true
     tty: true
     volumes:
       - .:/app
     ports:
-      - '8080:8080'
+      - '3000:3000'
   db:
     image: mysql:8.0
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
     environment:
       MYSQL_DATABASE: api_database # database名
       MYSQL_ROOT_PASSWORD: pass
@@ -25,6 +28,7 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
       - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/init:/docker-entrypoint-initdb.d
 
 volumes:
   dbdata:
