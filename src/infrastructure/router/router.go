@@ -10,7 +10,7 @@ func RouterInit(echo *echo.Echo) {
 
 	g := echo.Group("/hoge")
 	{
-		g.POST("hogehoge", hogeController.CreateHoge())
+		g.POST("/hogehoge", hogeController.CreateHoge())
 	}
 
 }
