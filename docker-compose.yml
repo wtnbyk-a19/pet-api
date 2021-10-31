@@ -33,7 +33,7 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
       - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/db/init:/docker-entrypoint-initdb.d
+      - ./docker/db/init/:/docker-entrypoint-initdb.d
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
 
