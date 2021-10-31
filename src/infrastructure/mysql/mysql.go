@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -21,18 +22,17 @@ func NewDbConnection() *DbConnection {
 }
 
 func dbConnect() (connection *gorm.DB) {
-	error := godotenv.Load(".env")
+	error := godotenv.Load("/go/api/.env")
 	if error != nil {
 		logrus.Fatal(error)
 	}
 
 	connection, error = gorm.Open("mysql",
-		os.Getenv("DB_USERNAME") + ":" +
-		os.Getenv("DB_PASSWORD") + "@tcp)" +
-		os.Getenv("DB_HOST") + ":" +
-		os.Getenv("DB_PORT") + ")/" +
-		os.Getenv("DB_DATABASE") +
-		"?charset=utf8mb4&parseTime=True&loc=local")
+		os.Getenv("DB_USERNAME")+":"+
+			os.Getenv("DB_PASSWORD")+"@tcp("+
+			os.Getenv("DB_HOST")+")/"+
+			os.Getenv("DB_DATABASE")+
+			"?charset=utf8mb4&parseTime=True&loc=Local")
 
 	if error != nil {
 		logrus.Fatal(error)

@@ -5,23 +5,27 @@ services:
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile
+    depends_on:
+      - db
     stdin_open: true
     tty: true
     volumes:
-      - .:/app
+      - .:/go/api
     ports:
       - '3000:3000'
   db:
     image: mysql:8.0
+    container_name: dbContainer
     build:
       context: .
       dockerfile: ./docker/db/Dockerfile
     environment:
-      MYSQL_DATABASE: api_database # database名
+      MYSQL_DATABASE: go_database # database名
       MYSQL_ROOT_PASSWORD: pass
-      MYSQL_USER: default
+      MYSQL_USER: user
       MYSQL_PASSWORD: password
-      TZ: 'Asia/Tokyo'
+      TZ: Asia/Tokyo
+    restart: always
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - '3306:3306'

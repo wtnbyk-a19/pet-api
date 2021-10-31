@@ -8,9 +8,9 @@ import (
 )
 
 func init() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		logrus.Fatal(err)
+	error := godotenv.Load("/go/api/.env")
+	if error != nil {
+		logrus.Fatal(error)
 	}
 
 	logrus.SetLevel(logrus.DebugLevel)
@@ -18,22 +18,11 @@ func init() {
 }
 
 func main() {
-
-	e := echo.New()
-
-	//logrus.Println(os.Getwd())
-	//files, _ := ioutil.ReadDir(".")
-	//for _, file :=range files {
-	//	logrus.Println(file.Name())
-	//}
+	echo := echo.New()
 
 	// Routes
-	router.RouterInit(e)
-
-	//e.GET("/", func(c echo.Context) error {
-	//	return c.String(http.StatusOK, "Hello, Echo World!!")
-	//})
+	router.RouterInit(echo)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":3000"))
+	echo.Logger.Fatal(echo.Start(":3000"))
 }
