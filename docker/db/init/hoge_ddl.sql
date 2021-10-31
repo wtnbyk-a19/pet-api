@@ -1,6 +1,7 @@
-create TABLE IF NOT EXISTS go_database.hoge (
-`hoge_id` int(11) NOT NULL,
+create TABLE IF NOT EXISTS hoges (
+`hoge_id` int(11) NOT NULL AUTO_INCREMENT,
 `hogehoge` text NOT NULL,
 `created_at` DATETIME,
-`update_at` DATETIME
+`update_at` DATETIME,
+PRIMARY KEY (`hoge_id`)
 );
