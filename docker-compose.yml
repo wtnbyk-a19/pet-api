@@ -1,12 +1,13 @@
 version: '3'
 
 services:
-  api: # service名
+  api:
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     stdin_open: true
     tty: true
     volumes:
@@ -33,6 +34,8 @@ services:
       - dbdata:/var/lib/mysql
       - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/db/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
 
 volumes:
   dbdata:
