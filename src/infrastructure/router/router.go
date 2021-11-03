@@ -1,7 +1,7 @@
 package router
 
 import (
-	"docker-go-api/src/injector"
+	"../../injector"
 	"github.com/labstack/echo"
 )
 

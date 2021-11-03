@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"docker-go-api/src/domain/model"
-	"docker-go-api/src/domain/repository"
+	"../../domain/model"
+	"../../domain/repository"
 )
 
 type IHogeUsecase interface {
