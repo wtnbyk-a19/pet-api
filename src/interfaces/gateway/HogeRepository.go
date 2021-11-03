@@ -1,9 +1,9 @@
 package gateway
 
 import (
-	"docker-go-api/src/domain/model"
-	"docker-go-api/src/domain/repository"
-	"docker-go-api/src/infrastructure/mysql"
+	"pet-api/src/domain/model"
+	"pet-api/src/domain/repository"
+	"pet-api/src/infrastructure/mysql"
 )
 
 type HogeRepository struct {

@@ -5,7 +5,7 @@ WORKDIR /go/api
 
 COPY . ./
 
-RUN go mod download
+RUN go mod vendor
 
 WORKDIR /go/api/src
 

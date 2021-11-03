@@ -1,11 +1,11 @@
 package injector
 
 import (
-	"docker-go-api/src/application/usecase"
-	"docker-go-api/src/domain/repository"
-	"docker-go-api/src/infrastructure/mysql"
-	"docker-go-api/src/interfaces/controller"
-	"docker-go-api/src/interfaces/gateway"
+	"pet-api/src/application/usecase"
+	"pet-api/src/domain/repository"
+	"pet-api/src/infrastructure/mysql"
+	"pet-api/src/interfaces/controller"
+	"pet-api/src/interfaces/gateway"
 )
 
 func injectDB() mysql.DbConnection {

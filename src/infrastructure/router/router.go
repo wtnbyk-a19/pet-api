@@ -1,8 +1,8 @@
 package router
 
 import (
-	"docker-go-api/src/injector"
 	"github.com/labstack/echo"
+	"pet-api/src/injector"
 )
 
 func RouterInit(echo *echo.Echo) {

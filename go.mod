@@ -1,4 +1,4 @@
-module docker-go-api
+module pet-api
 
 go 1.15
 

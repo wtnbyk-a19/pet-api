@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"docker-go-api/src/application/usecase"
-	"docker-go-api/src/domain/model"
 	"github.com/labstack/echo"
 	"net/http"
+	"pet-api/src/application/usecase"
+	"pet-api/src/domain/model"
 )
 
 type HogeController struct {
@@ -16,20 +16,23 @@ func NewHogeController(hogeUsecase usecase.IHogeUsecase) HogeController {
 	return hogeHandler
 }
 
-func (hogrController *HogeController) CreateHoge() echo.HandlerFunc {
+func (hogeController *HogeController) CreateHoge() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		// TODO: リクエスト構造体の定義
 		var request struct {
 			Hogehoge string `json:"hogehoge"`
 		}
-		context.Bind(&request)
+		err := context.Bind(&request)
+		if err != nil {
+			return err
+		}
 
 		hoge := model.NewHoge(request.Hogehoge)
 
-		error := hogrController.hogeUsecase.Execute(hoge)
-		if error != nil {
-			return context.JSON(http.StatusBadRequest, error)
+		err = hogeController.hogeUsecase.Execute(hoge)
+		if err != nil {
+			return context.JSON(http.StatusBadRequest, err)
 		}
-		return context.JSON(http.StatusOK, error)
+		return context.JSON(http.StatusOK, err)
 	}
 }
