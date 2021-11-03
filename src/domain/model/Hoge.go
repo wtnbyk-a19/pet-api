@@ -5,7 +5,7 @@ import (
 )
 
 type Hoge struct {
-	hogeId    int       `json:"hoge_id"gorm:"primary_key"`
+	hogeId    int       `json:"hoge_id" gorm:"primary_key"`
 	Hogehoge  string    `json:"hogehoge"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
