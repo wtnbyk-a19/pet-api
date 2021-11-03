@@ -6,11 +6,11 @@ import (
 )
 
 func RouterInit(echo *echo.Echo) {
-	hogeController := injector.InjectHogeController()
+	petController := injector.InjectPetController()
 
-	g := echo.Group("/hoge")
+	g := echo.Group("/pet")
 	{
-		g.POST("/hogehoge", hogeController.CreateHoge())
+		g.POST("/petpet", petController.CreatePet())
 	}
 
 }

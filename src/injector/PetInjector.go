@@ -13,16 +13,16 @@ func injectDB() mysql.DbConnection {
 	return *dbConnection
 }
 
-func injectRepository() repository.IHogeRepository {
+func injectRepository() repository.IPetRepository {
 	dbConnection := injectDB()
-	return gateway.NewHogeRepository(dbConnection)
+	return gateway.NewpetRepository(dbConnection)
 }
 
-func injectUsecase() usecase.IHogeUsecase {
-	hogeRepository := injectRepository()
-	return usecase.NewHogeUsecase(hogeRepository)
+func injectUsecase() usecase.IPetUsecase {
+	petRepository := injectRepository()
+	return usecase.NewPetUsecase(petRepository)
 }
 
-func InjectHogeController() controller.HogeController {
-	return controller.NewHogeController(injectUsecase())
+func InjectPetController() controller.PetController {
+	return controller.NewPetController(injectUsecase())
 }

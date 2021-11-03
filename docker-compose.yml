@@ -2,7 +2,7 @@ version: '3'
 
 services:
   api:
-    container_name: apiContainer
+    container_name: pet_api
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile
@@ -17,12 +17,12 @@ services:
       - '3000:3000'
   db:
     image: mysql:8.0
-    container_name: dbContainer
+    container_name: pet_db
     build:
       context: .
       dockerfile: ./docker/db/Dockerfile
     environment:
-      MYSQL_DATABASE: go_database # database名
+      MYSQL_DATABASE: pet # database名
       MYSQL_ROOT_PASSWORD: pass
       MYSQL_USER: user
       MYSQL_PASSWORD: password
