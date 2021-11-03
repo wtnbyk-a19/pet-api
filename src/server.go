@@ -21,7 +21,7 @@ func main() {
 	e := echo.New()
 
 	// Routes
-	router.RouterInit(e)
+	router.Init(e)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":3000"))

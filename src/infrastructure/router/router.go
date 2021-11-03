@@ -5,12 +5,12 @@ import (
 	"pet-api/src/injector"
 )
 
-func RouterInit(echo *echo.Echo) {
+func Init(echo *echo.Echo) {
 	petController := injector.InjectPetController()
 
 	g := echo.Group("/pet")
 	{
-		g.POST("/petpet", petController.CreatePet())
+		g.POST("/edit", petController.CreatePet())
 	}
 
 }

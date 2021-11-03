@@ -20,14 +20,14 @@ func (petController *PetController) CreatePet() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		// TODO: リクエスト構造体の定義
 		var request struct {
-			petpet string `json:"petpet"`
+			name string `json:"name"`
 		}
 		err := context.Bind(&request)
 		if err != nil {
 			return context.JSON(http.StatusBadRequest, err)
 		}
 
-		pet := model.NewPet(request.petpet)
+		pet := model.NewPet(request.name)
 
 		err = petController.petUsecase.Execute(pet)
 		if err != nil {

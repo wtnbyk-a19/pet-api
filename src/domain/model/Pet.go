@@ -5,15 +5,15 @@ import (
 )
 
 type Pet struct {
-	petId     int       `json:"pet_id" gorm:"primary_key"`
-	Petpet    string    `json:"petpet"`
+	PetId     int       `json:"pet_id" gorm:"primary_key"`
+	Name      string    `json:"name"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func NewPet(petpet string) *Pet {
+func NewPet(name string) *Pet {
 	pet := new(Pet)
-	pet.Petpet = petpet
+	pet.Name = name
 
 	// TODO: タイムゾーンの修正
 	pet.CreatedAt = time.Now()
