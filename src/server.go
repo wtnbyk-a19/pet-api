@@ -1,16 +1,16 @@
 package main
 
 import (
-	"./infrastructure/router"
+	"docker-go-api/src/infrastructure/router"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/sirupsen/logrus"
 )
 
 func init() {
-	err := godotenv.Load("/go/api/.env")
-	if err != nil {
-		logrus.Fatal(err)
+	error := godotenv.Load("/go/api/.env")
+	if error != nil {
+		logrus.Fatal(error)
 	}
 
 	logrus.SetLevel(logrus.DebugLevel)
@@ -18,11 +18,11 @@ func init() {
 }
 
 func main() {
-	e := echo.New()
+	echo := echo.New()
 
 	// Routes
-	router.RouterInit(e)
+	router.RouterInit(echo)
 
 	// Start server
-	echo.Logger.Fatal(e.Start(":3000"))
+	echo.Logger.Fatal(echo.Start(":3000"))
 }
