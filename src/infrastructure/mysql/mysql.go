@@ -22,20 +22,20 @@ func NewDbConnection() *DbConnection {
 }
 
 func dbConnect() (connection *gorm.DB) {
-	error := godotenv.Load("/go/api/.env")
-	if error != nil {
-		logrus.Fatal(error)
+	err := godotenv.Load("/go/api/.env")
+	if err != nil {
+		logrus.Fatal(err)
 	}
 
-	connection, error = gorm.Open("mysql",
+	connection, err = gorm.Open("mysql",
 		os.Getenv("DB_USERNAME")+":"+
 			os.Getenv("DB_PASSWORD")+"@tcp("+
 			os.Getenv("DB_HOST")+")/"+
 			os.Getenv("DB_DATABASE")+
 			"?charset=utf8mb4&parseTime=True&loc=Local")
 
-	if error != nil {
-		logrus.Fatal(error)
+	if err != nil {
+		logrus.Fatal(err)
 	}
 
 	return connection
