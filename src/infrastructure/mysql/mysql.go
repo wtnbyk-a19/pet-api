@@ -22,7 +22,7 @@ func NewDbConnection() *DbConnection {
 }
 
 func dbConnect() (connection *gorm.DB) {
-	err := godotenv.Load("/go/api/.env")
+	err := godotenv.Load("go/api/env/dev.env")
 	if err != nil {
 		logrus.Fatal(err)
 	}

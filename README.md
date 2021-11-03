@@ -2,5 +2,5 @@
 
 ## Usage
 ``
-go mod download
+go mod vendor
 ``
