@@ -1,0 +1,53 @@
+@startuml
+class Pet {
+PetId: int
+UserId: int
+PetName: string
+Gender: string
+Variety: string
+Breed: string
+Birthday: time.Time
+Adoptaversary: time.Time
+Memo: string
+
+CreatedAt: time.Time
+UpdatedAt: time.Time
+DeletedAt: time.Time
+}
+
+class Body {
+BodyId: int
+PetId: int
+Length: float
+Height: float
+Weight: float
+Neckline: float
+Chest: float
+Waistline: float
+BackLength: float
+LegLength: float
+PawWidth: float
+PawLength: float
+DateOfMeasurement: time.Time
+Memo: string
+
+CreatedAt: time.Time
+UpdatedAt: time.Time
+DeletedAt: time.Time
+}
+
+class User {
+UserId: int
+Uuid: string
+UserName: string
+Email: string
+Password: string
+
+CreatedAt: time.Time
+UpdatedAt: time.Time
+DeletedAt: time.Time
+}
+
+User "1" -- "1..*" Pet
+Pet "1" -- "0..*" Body
+@enduml
