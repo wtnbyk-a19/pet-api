@@ -15,7 +15,7 @@ func injectDB() mysql.DbConnection {
 
 func injectRepository() repository.IPetRepository {
 	dbConnection := injectDB()
-	return gateway.NewpetRepository(dbConnection)
+	return gateway.NewPetRepository(dbConnection)
 }
 
 func injectUsecase() usecase.IPetUsecase {

@@ -10,7 +10,7 @@ type petRepository struct {
 	dbConnection mysql.DbConnection
 }
 
-func NewpetRepository(dbConnection mysql.DbConnection) repository.IPetRepository {
+func NewPetRepository(dbConnection mysql.DbConnection) repository.IPetRepository {
 	petRepository := petRepository{dbConnection}
 	return &petRepository
 }

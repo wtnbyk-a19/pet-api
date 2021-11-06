@@ -13,7 +13,7 @@ type DbConnection struct {
 }
 
 func NewDbConnection() *DbConnection {
-	connection := dbConnect()
+	connection := connect()
 
 	dbConnection := new(DbConnection)
 	dbConnection.Connection = connection
@@ -21,7 +21,7 @@ func NewDbConnection() *DbConnection {
 	return dbConnection
 }
 
-func dbConnect() (connection *gorm.DB) {
+func connect() (connection *gorm.DB) {
 	err := godotenv.Load("go/api/env/dev.env")
 	if err != nil {
 		logrus.Fatal(err)
