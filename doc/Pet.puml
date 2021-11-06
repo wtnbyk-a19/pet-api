@@ -13,6 +13,8 @@ Memo: string
 CreatedAt: time.Time
 UpdatedAt: time.Time
 DeletedAt: time.Time
+
+
 }
 
 class Body {

@@ -10,7 +10,7 @@ func Init(echo *echo.Echo) {
 
 	g := echo.Group("/pet")
 	{
-		g.POST("/edit", petController.CreatePet())
+		g.POST("/edit", petController.SavePet())
 	}
 
 }

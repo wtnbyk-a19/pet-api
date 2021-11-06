@@ -16,7 +16,7 @@ func NewPetController(petUsecase usecase.IPetUsecase) PetController {
 	return petHandler
 }
 
-func (petController *PetController) CreatePet() echo.HandlerFunc {
+func (petController *PetController) SavePet() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		// TODO: リクエスト構造体の定義
 		var request struct {
@@ -29,7 +29,7 @@ func (petController *PetController) CreatePet() echo.HandlerFunc {
 
 		pet := model.NewPet(request.name)
 
-		err = petController.petUsecase.Execute(pet)
+		err = petController.petUsecase.SavePet(pet)
 		if err != nil {
 			return context.JSON(http.StatusBadRequest, err)
 		}

@@ -6,7 +6,7 @@ import (
 )
 
 type IPetUsecase interface {
-	Execute(*model.Pet) (error error)
+	SavePet(*model.Pet) (error error)
 }
 
 type petUsecase struct {
@@ -18,7 +18,7 @@ func NewPetUsecase(petRepository repository.IPetRepository) IPetUsecase {
 	return &petUsecase
 }
 
-func (petUsecase *petUsecase) Execute(pet *model.Pet) (error error) {
-	error = petUsecase.petRepository.Persist(pet)
+func (petUsecase *petUsecase) SavePet(pet *model.Pet) (error error) {
+	error = petUsecase.petRepository.Save(pet)
 	return error
 }
