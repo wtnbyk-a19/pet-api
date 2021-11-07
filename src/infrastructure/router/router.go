@@ -1,16 +1,18 @@
 package router
 
 import (
-	"github.com/labstack/echo"
+	"github.com/gofiber/fiber"
 	"pet-api/src/injector"
 )
 
-func Init(echo *echo.Echo) {
+func Init(app *fiber.App) {
 	petController := injector.InjectPetController()
 
-	g := echo.Group("/pet")
-	{
-		g.POST("/edit", petController.SavePet())
-	}
+	app.Post("/pet", petController.SavePet)
+
+	//g := echo.Group("/pet")
+	//{
+	//	g.POST("/edit", petController.SavePet())
+	//}
 
 }

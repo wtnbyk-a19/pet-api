@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/gofiber/fiber"
 	"github.com/joho/godotenv"
-	"github.com/labstack/echo"
 	"github.com/sirupsen/logrus"
 	"pet-api/src/infrastructure/router"
 )
@@ -18,11 +18,12 @@ func init() {
 }
 
 func main() {
-	e := echo.New()
+	app := fiber.New()
 
-	// Routes
-	router.Init(e)
+	router.Init(app)
 
-	// Start server
-	e.Logger.Fatal(e.Start(":3000"))
+	err := app.Listen(3000)
+	if err != nil {
+		return
+	}
 }

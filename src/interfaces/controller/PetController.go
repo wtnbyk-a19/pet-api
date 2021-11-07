@@ -1,10 +1,8 @@
 package controller
 
 import (
-	"github.com/labstack/echo"
-	"net/http"
+	"github.com/gofiber/fiber"
 	"pet-api/src/application/usecase"
-	"pet-api/src/domain/model"
 )
 
 type PetController struct {
@@ -16,23 +14,18 @@ func NewPetController(petUsecase usecase.IPetUsecase) PetController {
 	return petHandler
 }
 
-func (petController *PetController) SavePet() echo.HandlerFunc {
-	return func(context echo.Context) error {
-		// TODO: リクエスト構造体の定義
-		var request struct {
-			name string `json:"name"`
-		}
-		err := context.Bind(&request)
-		if err != nil {
-			return context.JSON(http.StatusBadRequest, err)
-		}
+func (petController *PetController) SavePet(c *fiber.Ctx) {
 
-		pet := model.NewPet(request.name)
-
-		err = petController.petUsecase.SavePet(pet)
-		if err != nil {
-			return context.JSON(http.StatusBadRequest, err)
-		}
-		return context.JSON(http.StatusOK, err)
-	}
+	//err := c.Bind(&request)
+	//if err != nil {
+	//	return c.JSON(http.StatusBadRequest, err)
+	//}
+	//
+	//pet := model.NewPet(request.name)
+	//
+	//err = petController.petUsecase.SavePet(pet)
+	//if err != nil {
+	//	return context.JSON(http.StatusBadRequest, err)
+	//}
+	//return context.JSON(http.StatusOK, err)
 }

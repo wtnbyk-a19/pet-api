@@ -3,14 +3,14 @@ package gateway
 import (
 	"pet-api/src/domain/model"
 	"pet-api/src/domain/repository"
-	"pet-api/src/infrastructure/mysql"
+	"pet-api/src/infrastructure/database"
 )
 
 type petRepository struct {
-	dbConnection mysql.DbConnection
+	dbConnection database.DbConnection
 }
 
-func NewPetRepository(dbConnection mysql.DbConnection) repository.IPetRepository {
+func NewPetRepository(dbConnection database.DbConnection) repository.IPetRepository {
 	petRepository := petRepository{dbConnection}
 	return &petRepository
 }

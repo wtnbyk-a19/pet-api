@@ -3,13 +3,13 @@ package injector
 import (
 	"pet-api/src/application/usecase"
 	"pet-api/src/domain/repository"
-	"pet-api/src/infrastructure/mysql"
+	"pet-api/src/infrastructure/database"
 	"pet-api/src/interfaces/controller"
 	"pet-api/src/interfaces/gateway"
 )
 
-func injectDB() mysql.DbConnection {
-	dbConnection := mysql.NewDbConnection()
+func injectDB() database.DbConnection {
+	dbConnection := database.NewDbConnection()
 	return *dbConnection
 }
 
