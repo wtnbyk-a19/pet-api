@@ -8,14 +8,8 @@ import (
 	"pet-api/src/interfaces/gateway"
 )
 
-func injectDB() database.DbConnection {
-	dbConnection := database.NewDbConnection()
-	return *dbConnection
-}
-
 func injectRepository() repository.IPetRepository {
-	dbConnection := injectDB()
-	return gateway.NewPetRepository(dbConnection)
+	return gateway.NewPetRepository(database.DbConn)
 }
 
 func injectUsecase() usecase.IPetUsecase {

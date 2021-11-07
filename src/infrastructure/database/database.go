@@ -6,28 +6,24 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"os"
+	"pet-api/src/domain/model"
 )
 
 type DbConnection struct {
-	Connection *gorm.DB
+	Conn *gorm.DB
 }
 
-func NewDbConnection() *DbConnection {
-	connection := connect()
+var (
+	DbConn DbConnection
+)
 
-	dbConnection := new(DbConnection)
-	dbConnection.Connection = connection
-
-	return dbConnection
-}
-
-func connect() (connection *gorm.DB) {
+func Init() {
 	err := godotenv.Load("go/api/env/dev.env")
 	if err != nil {
 		logrus.Fatal(err)
 	}
 
-	connection, err = gorm.Open("mysql",
+	DbConn.Conn, err = gorm.Open("mysql",
 		os.Getenv("DB_USERNAME")+":"+
 			os.Getenv("DB_PASSWORD")+"@tcp("+
 			os.Getenv("DB_HOST")+")/"+
@@ -38,5 +34,9 @@ func connect() (connection *gorm.DB) {
 		logrus.Fatal(err)
 	}
 
-	return connection
+	migrate()
+}
+
+func migrate() {
+	DbConn.Conn.AutoMigrate(&model.Pet{})
 }

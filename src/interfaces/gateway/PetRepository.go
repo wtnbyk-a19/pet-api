@@ -7,7 +7,7 @@ import (
 )
 
 type petRepository struct {
-	dbConnection database.DbConnection
+	dbConn database.DbConnection
 }
 
 func NewPetRepository(dbConnection database.DbConnection) repository.IPetRepository {
@@ -17,6 +17,6 @@ func NewPetRepository(dbConnection database.DbConnection) repository.IPetReposit
 
 func (petRepository *petRepository) Save(pet *model.Pet) (error error) {
 
-	result := petRepository.dbConnection.Connection.Create(pet)
+	result := petRepository.dbConn.Conn.Create(pet)
 	return result.Error
 }

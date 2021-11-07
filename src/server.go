@@ -2,8 +2,10 @@ package main
 
 import (
 	"github.com/gofiber/fiber"
+	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
+	"pet-api/src/infrastructure/database"
 	"pet-api/src/infrastructure/router"
 )
 
@@ -19,6 +21,14 @@ func init() {
 
 func main() {
 	app := fiber.New()
+
+	database.Init()
+	defer func(conn *gorm.DB) {
+		err := conn.Close()
+		if err != nil {
+			logrus.Fatal(err)
+		}
+	}(database.DbConn.Conn)
 
 	router.Init(app)
 
