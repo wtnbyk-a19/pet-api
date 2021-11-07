@@ -1,8 +1,7 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber"
-	"net/http"
+	"github.com/gofiber/fiber/v2"
 	"pet-api/src/application/usecase"
 )
 
@@ -21,15 +20,15 @@ func (petController *PetController) CreatePet(c *fiber.Ctx) {
 	var err error
 	err = params.ParamsSetup(c)
 	if err != nil {
-		c.Status(http.StatusBadRequest).Send(err)
+		c.SendStatus(fiber.StatusBadRequest)
 		return
 	}
 
 	err = petController.petUsecase.CreatePet(params)
 	if err != nil {
-		c.Status(http.StatusBadRequest).Send(err)
+		c.SendStatus(fiber.StatusBadRequest)
 		return
 	}
 
-	c.Status(http.StatusOK)
+	c.SendStatus(fiber.StatusOK)
 }

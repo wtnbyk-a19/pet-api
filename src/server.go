@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
@@ -14,9 +14,6 @@ func init() {
 	if err != nil {
 		logrus.Fatal(err)
 	}
-
-	logrus.SetLevel(logrus.DebugLevel)
-	logrus.SetFormatter(&logrus.JSONFormatter{})
 }
 
 func main() {
@@ -32,7 +29,7 @@ func main() {
 
 	router.Init(app)
 
-	err := app.Listen(3000)
+	err := app.Listen(":3000")
 	if err != nil {
 		return
 	}
