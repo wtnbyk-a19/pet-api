@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"github.com/gofiber/fiber"
-	"github.com/sirupsen/logrus"
 	"pet-api/src/domain/model"
 	"pet-api/src/domain/repository"
 )
@@ -32,7 +31,7 @@ type PetCreateParameter struct {
 }
 
 func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) {
-	var pet *model.Pet
+	var pet model.Pet
 	pet, err = model.NewPet(
 		params.userId,
 		params.petName,
@@ -43,17 +42,15 @@ func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) 
 		params.memo,
 	)
 
-	err = petUsecase.petRepository.Create(pet)
+	err = petUsecase.petRepository.Create(&pet)
 	return err
 }
 
-func (params PetCreateParameter) Setup(c *fiber.Ctx) (err error) {
+func (params PetCreateParameter) ParamsSetup(c *fiber.Ctx) (err error) {
 	err = c.BodyParser(&params)
 	if err != nil {
-		logrus.Println("params error", err)
+		return err
 	}
-
-	logrus.Println("params output", params)
 
 	return
 }

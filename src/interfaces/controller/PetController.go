@@ -19,7 +19,7 @@ func (petController *PetController) CreatePet(c *fiber.Ctx) {
 	params := new(usecase.PetCreateParameter)
 
 	var err error
-	err = params.Setup(c)
+	err = params.ParamsSetup(c)
 	if err != nil {
 		c.Status(http.StatusBadRequest).Send(err)
 		return
