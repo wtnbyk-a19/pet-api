@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
@@ -19,6 +20,7 @@ func init() {
 func main() {
 	app := fiber.New()
 
+	loggerInit(app)
 	database.Init()
 	defer func(conn *gorm.DB) {
 		err := conn.Close()
@@ -29,8 +31,16 @@ func main() {
 
 	router.Init(app)
 
-	err := app.Listen(":3000")
-	if err != nil {
-		return
+	app.Listen(":3000")
+}
+
+func loggerInit(app *fiber.App) {
+	var loggerConfig = logger.Config{
+		Next:       nil,
+		Format:     "[${time}] ${status} - ${latency} ${method} ${path}\n",
+		TimeFormat: "15:04:05",
+		TimeZone:   "Local",
 	}
+
+	app.Use(loggerConfig)
 }
