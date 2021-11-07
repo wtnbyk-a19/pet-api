@@ -14,21 +14,19 @@ func NewPetController(petUsecase usecase.IPetUsecase) PetController {
 	return petController
 }
 
-func (petController *PetController) CreatePet(c *fiber.Ctx) {
+func (petController *PetController) CreatePet(c *fiber.Ctx) error {
 	params := new(usecase.PetCreateParameter)
 
 	var err error
 	err = params.ParamsSetup(c)
 	if err != nil {
-		c.SendStatus(fiber.StatusBadRequest)
-		return
+		return c.SendStatus(fiber.StatusBadRequest)
 	}
 
 	err = petController.petUsecase.CreatePet(params)
 	if err != nil {
-		c.SendStatus(fiber.StatusBadRequest)
-		return
+		return c.SendStatus(fiber.StatusBadRequest)
 	}
 
-	c.SendStatus(fiber.StatusOK)
+	return c.SendStatus(fiber.StatusOK)
 }
