@@ -35,12 +35,9 @@ func main() {
 }
 
 func loggerInit(app *fiber.App) {
-	var loggerConfig = logger.Config{
-		Next:       nil,
+	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] ${status} - ${latency} ${method} ${path}\n",
 		TimeFormat: "15:04:05",
 		TimeZone:   "Local",
-	}
-
-	app.Use(loggerConfig)
+	}))
 }
