@@ -31,7 +31,7 @@ type PetCreateParameter struct {
 }
 
 func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) {
-	var pet model.Pet
+	var pet *model.Pet
 	pet, err = model.NewPet(
 		params.userId,
 		params.petName,
@@ -42,7 +42,7 @@ func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) 
 		params.memo,
 	)
 
-	err = petUsecase.petRepository.Create(&pet)
+	err = petUsecase.petRepository.Create(pet)
 	return err
 }
 

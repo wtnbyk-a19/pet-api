@@ -19,24 +19,24 @@ type Pet struct {
 }
 
 func NewPet(userIdStr string, petName string, gender string, breed string, birthdayStr string, adoptaversaryStr string, memo string) (pet *Pet, err error) {
-	pet = new(Pet)
+	pet = &Pet{}
 
 	var userId int
 	userId, err = strconv.Atoi(userIdStr)
 	if err != nil {
-		return nil, err
+		return pet, err
 	}
 
 	var birthday time.Time
 	birthday, err = time.Parse("20211107", birthdayStr)
 	if err != nil {
-		return nil, err
+		return pet, err
 	}
 
 	var adoptaversary time.Time
 	adoptaversary, err = time.Parse("20211107", adoptaversaryStr)
 	if err != nil {
-		return nil, err
+		return pet, err
 	}
 
 	pet.UserId = userId
