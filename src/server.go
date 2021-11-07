@@ -15,6 +15,9 @@ func init() {
 	if err != nil {
 		logrus.Fatal(err)
 	}
+
+	logrus.SetLevel(logrus.DebugLevel)
+	logrus.SetFormatter(&logrus.JSONFormatter{})
 }
 
 func main() {
