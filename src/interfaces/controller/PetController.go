@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gofiber/fiber"
+	"net/http"
 	"pet-api/src/application/usecase"
 )
 
@@ -10,22 +11,27 @@ type PetController struct {
 }
 
 func NewPetController(petUsecase usecase.IPetUsecase) PetController {
-	petHandler := PetController{petUsecase: petUsecase}
-	return petHandler
+	petController := PetController{petUsecase: petUsecase}
+	return petController
 }
 
-func (petController *PetController) SavePet(c *fiber.Ctx) {
+func (petController *PetController) CreatePet(c *fiber.Ctx) {
 
-	//err := c.Bind(&request)
-	//if err != nil {
-	//	return c.JSON(http.StatusBadRequest, err)
-	//}
-	//
-	//pet := model.NewPet(request.name)
-	//
-	//err = petController.petUsecase.SavePet(pet)
-	//if err != nil {
-	//	return context.JSON(http.StatusBadRequest, err)
-	//}
-	//return context.JSON(http.StatusOK, err)
+	params := new(usecase.PetCreateParameter)
+
+	var err error
+	err = params.Setup(c)
+	if err != nil {
+		c.Status(http.StatusBadRequest).Send(err)
+		return
+	}
+
+	err = petController.petUsecase.CreatePet(params)
+	if err != nil {
+		c.Status(http.StatusBadRequest).Send(err)
+		return
+	}
+
+	c.Status(http.StatusOK)
+
 }

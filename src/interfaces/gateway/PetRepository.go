@@ -15,7 +15,7 @@ func NewPetRepository(dbConnection database.DbConnection) repository.IPetReposit
 	return &petRepository
 }
 
-func (petRepository *petRepository) Save(pet *model.Pet) (error error) {
+func (petRepository *petRepository) Create(pet *model.Pet) (error error) {
 
 	result := petRepository.dbConn.Conn.Create(pet)
 	return result.Error
