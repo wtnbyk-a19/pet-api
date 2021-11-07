@@ -2,10 +2,9 @@ package usecase
 
 import (
 	"github.com/gofiber/fiber"
+	"github.com/sirupsen/logrus"
 	"pet-api/src/domain/model"
 	"pet-api/src/domain/repository"
-	"strconv"
-	"time"
 )
 
 type IPetUsecase interface {
@@ -22,19 +21,19 @@ func NewPetUsecase(petRepository repository.IPetRepository) IPetUsecase {
 }
 
 type PetCreateParameter struct {
-	userId        int
-	petName       string
-	gender        string
-	variety       string
-	breed         string
-	birthday      time.Time
-	adoptaversary time.Time
-	memo          string
+	userId        string `json:"user_id"`
+	petName       string `json:"pet_name"`
+	gender        string `json:"gender"`
+	variety       string `json:"variety"`
+	breed         string `json:"breed"`
+	birthday      string `json:"birthday"`
+	adoptaversary string `json:"adoptaversary"`
+	memo          string `json:"memo"`
 }
 
-func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (error error) {
-
-	pet := model.NewPet(
+func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) {
+	var pet *model.Pet
+	pet, err = model.NewPet(
 		params.userId,
 		params.petName,
 		params.gender,
@@ -44,37 +43,17 @@ func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (error error
 		params.memo,
 	)
 
-	error = petUsecase.petRepository.Create(pet)
-	return error
+	err = petUsecase.petRepository.Create(pet)
+	return err
 }
 
 func (params PetCreateParameter) Setup(c *fiber.Ctx) (err error) {
-	var userId int
-	userId, err = strconv.Atoi(c.Params("user_id"))
+	err = c.BodyParser(&params)
 	if err != nil {
-		return err
+		logrus.Println("params error", err)
 	}
 
-	var birthday time.Time
-	birthday, err = time.Parse("20211107", c.Params("birthday"))
-	if err != nil {
-		return err
-	}
-
-	var adoptaversary time.Time
-	adoptaversary, err = time.Parse("20211107", c.Params("adoptaversary"))
-	if err != nil {
-		return err
-	}
-
-	params.userId = userId
-	params.petName = c.Params("pet_name")
-	params.gender = c.Params("gender")
-	params.variety = c.Params("variety")
-	params.breed = c.Params("breed")
-	params.birthday = birthday
-	params.adoptaversary = adoptaversary
-	params.memo = c.Params("memo")
+	logrus.Println("params output", params)
 
 	return
 }

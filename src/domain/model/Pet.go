@@ -1,6 +1,7 @@
 package model
 
 import (
+	"strconv"
 	"time"
 )
 
@@ -17,8 +18,26 @@ type Pet struct {
 	Model
 }
 
-func NewPet(userId int, petName string, gender string, breed string, birthday time.Time, adoptaversary time.Time, memo string) *Pet {
-	pet := new(Pet)
+func NewPet(userIdStr string, petName string, gender string, breed string, birthdayStr string, adoptaversaryStr string, memo string) (pet *Pet, err error) {
+	pet = new(Pet)
+
+	var userId int
+	userId, err = strconv.Atoi(userIdStr)
+	if err != nil {
+		return nil, err
+	}
+
+	var birthday time.Time
+	birthday, err = time.Parse("20211107", birthdayStr)
+	if err != nil {
+		return nil, err
+	}
+
+	var adoptaversary time.Time
+	adoptaversary, err = time.Parse("20211107", adoptaversaryStr)
+	if err != nil {
+		return nil, err
+	}
 
 	pet.UserId = userId
 	pet.PetName = petName
@@ -28,5 +47,5 @@ func NewPet(userId int, petName string, gender string, breed string, birthday ti
 	pet.Adoptaversary = adoptaversary
 	pet.Memo = memo
 
-	return pet
+	return pet, nil
 }

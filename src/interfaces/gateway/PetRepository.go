@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	"github.com/sirupsen/logrus"
 	"pet-api/src/domain/model"
 	"pet-api/src/domain/repository"
 	"pet-api/src/infrastructure/database"
@@ -16,7 +17,9 @@ func NewPetRepository(dbConnection database.DbConnection) repository.IPetReposit
 }
 
 func (petRepository *petRepository) Create(pet *model.Pet) (error error) {
-
 	result := petRepository.dbConn.Conn.Create(pet)
+
+	logrus.Println(result)
+
 	return result.Error
 }

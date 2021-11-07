@@ -9,10 +9,4 @@ func Init(app *fiber.App) {
 	petController := injector.InjectPetController()
 
 	app.Post("/pet", petController.CreatePet)
-
-	//g := echo.Group("/pet")
-	//{
-	//	g.POST("/edit", petController.CreatePet())
-	//}
-
 }

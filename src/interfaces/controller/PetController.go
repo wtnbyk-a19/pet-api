@@ -16,7 +16,6 @@ func NewPetController(petUsecase usecase.IPetUsecase) PetController {
 }
 
 func (petController *PetController) CreatePet(c *fiber.Ctx) {
-
 	params := new(usecase.PetCreateParameter)
 
 	var err error
@@ -33,5 +32,4 @@ func (petController *PetController) CreatePet(c *fiber.Ctx) {
 	}
 
 	c.Status(http.StatusOK)
-
 }
