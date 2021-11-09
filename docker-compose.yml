@@ -12,7 +12,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/go/api
+      - ./:/go/api
     ports:
       - '3000:3000'
   db:

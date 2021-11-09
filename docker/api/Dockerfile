@@ -3,9 +3,10 @@ FROM golang:1.15.6 as builder
 
 WORKDIR /go/api
 
-COPY . ./
-
+COPY go.mod go.sum ./
 RUN go mod vendor
+
+COPY . ./
 
 WORKDIR /go/api/src
 
