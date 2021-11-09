@@ -20,26 +20,26 @@ func NewPetUsecase(petRepository repository.IPetRepository) IPetUsecase {
 }
 
 type PetCreateParameter struct {
-	userId        string `json:"user_id"`
-	petName       string `json:"pet_name"`
-	gender        string `json:"gender"`
-	variety       string `json:"variety"`
-	breed         string `json:"breed"`
-	birthday      string `json:"birthday"`
-	adoptaversary string `json:"adoptaversary"`
-	memo          string `json:"memo"`
+	UserId        string `json:"user_id"`
+	PetName       string `json:"pet_name"`
+	Gender        string `json:"gender"`
+	Variety       string `json:"variety"`
+	Breed         string `json:"breed"`
+	Birthday      string `json:"birthday"`
+	Adoptaversary string `json:"adoptaversary"`
+	Memo          string `json:"memo"`
 }
 
 func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) {
 	var pet *model.Pet
 	pet, err = model.NewPet(
-		params.userId,
-		params.petName,
-		params.gender,
-		params.breed,
-		params.birthday,
-		params.adoptaversary,
-		params.memo,
+		params.UserId,
+		params.PetName,
+		params.Gender,
+		params.Breed,
+		params.Birthday,
+		params.Adoptaversary,
+		params.Memo,
 	)
 
 	err = petUsecase.petRepository.Create(pet)
@@ -47,7 +47,7 @@ func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) 
 }
 
 func (params PetCreateParameter) ParamsSetup(c *fiber.Ctx) (err error) {
-	err = c.BodyParser(&params)
+	err = c.BodyParser(params)
 	if err != nil {
 		return err
 	}
