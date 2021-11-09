@@ -20,13 +20,13 @@ func (petController *PetController) CreatePet(c *fiber.Ctx) error {
 	var err error
 	err = params.ParamsSetup(c)
 	if err != nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.Status(fiber.StatusBadRequest).JSON(err)
 	}
 
 	err = petController.petUsecase.CreatePet(params)
 	if err != nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return c.Status(fiber.StatusBadRequest).JSON(err)
 	}
 
-	return c.SendStatus(fiber.StatusOK)
+	return c.Status(fiber.StatusOK).JSON(params)
 }
