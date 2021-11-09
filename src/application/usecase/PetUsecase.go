@@ -46,7 +46,7 @@ func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) 
 	return err
 }
 
-func (params PetCreateParameter) ParamsSetup(c *fiber.Ctx) (err error) {
+func (params *PetCreateParameter) ParamsSetup(c *fiber.Ctx) (err error) {
 	err = c.BodyParser(params)
 	if err != nil {
 		return err
