@@ -4,7 +4,7 @@ FROM golang:1.15.6 as builder
 WORKDIR /go/api
 
 COPY go.mod go.sum ./
-RUN go mod vendor
+RUN go mod download
 
 COPY . ./
 
