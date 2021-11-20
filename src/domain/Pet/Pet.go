@@ -1,6 +1,7 @@
-package model
+package Pet
 
 import (
+	"pet-api/src/domain/Model"
 	"strconv"
 	"time"
 )
@@ -15,7 +16,7 @@ type Pet struct {
 	Adoptaversary time.Time `json:"adoptaversary"`
 	Memo          string    `json:"memo"`
 
-	Model
+	Model.Model
 }
 
 func NewPet(userIdStr string, petName string, gender string, breed string, birthdayStr string, adoptaversaryStr string, memo string) (pet *Pet, err error) {

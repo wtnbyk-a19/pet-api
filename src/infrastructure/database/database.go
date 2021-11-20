@@ -6,7 +6,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"os"
-	"pet-api/src/domain/model"
+	"pet-api/src/domain/Pet"
 )
 
 type DbConnection struct {
@@ -38,5 +38,5 @@ func Init() {
 }
 
 func migrate() {
-	DbConn.Conn.AutoMigrate(&model.Pet{})
+	DbConn.Conn.AutoMigrate(&Pet.Pet{})
 }

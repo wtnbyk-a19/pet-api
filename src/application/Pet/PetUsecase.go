@@ -1,9 +1,8 @@
-package usecase
+package Pet
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"pet-api/src/domain/model"
-	"pet-api/src/domain/repository"
+	"pet-api/src/domain/Pet"
 )
 
 type IPetUsecase interface {
@@ -11,10 +10,10 @@ type IPetUsecase interface {
 }
 
 type petUsecase struct {
-	petRepository repository.IPetRepository
+	petRepository Pet.IPetRepository
 }
 
-func NewPetUsecase(petRepository repository.IPetRepository) IPetUsecase {
+func NewPetUsecase(petRepository Pet.IPetRepository) IPetUsecase {
 	petUsecase := petUsecase{petRepository: petRepository}
 	return &petUsecase
 }
@@ -31,8 +30,8 @@ type PetCreateParameter struct {
 }
 
 func (petUsecase *petUsecase) CreatePet(params *PetCreateParameter) (err error) {
-	var pet *model.Pet
-	pet, err = model.NewPet(
+	var pet *Pet.Pet
+	pet, err = Pet.NewPet(
 		params.UserId,
 		params.PetName,
 		params.Gender,

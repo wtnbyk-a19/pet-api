@@ -2,20 +2,20 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"pet-api/src/application/usecase"
+	"pet-api/src/application/Pet"
 )
 
 type PetController struct {
-	petUsecase usecase.IPetUsecase
+	petUsecase Pet.IPetUsecase
 }
 
-func NewPetController(petUsecase usecase.IPetUsecase) PetController {
+func NewPetController(petUsecase Pet.IPetUsecase) PetController {
 	petController := PetController{petUsecase: petUsecase}
 	return petController
 }
 
 func (petController *PetController) CreatePet(c *fiber.Ctx) error {
-	params := new(usecase.PetCreateParameter)
+	params := new(Pet.PetCreateParameter)
 
 	var err error
 	err = params.ParamsSetup(c)

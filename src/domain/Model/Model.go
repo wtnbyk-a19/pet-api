@@ -1,4 +1,4 @@
-package model
+package Model
 
 import (
 	"gorm.io/plugin/soft_delete"
