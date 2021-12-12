@@ -30,7 +30,7 @@ func NewPet(userIdStr string, petName string, gender string, breed string, birth
 	}
 
 	var birthday time.Time
-	birthday, err = time.Parse("20211014", birthdayStr)
+	birthday, err = time.Parse("2006-01-02", birthdayStr)
 	logrus.Println(birthdayStr)
 	logrus.Println(birthday)
 	logrus.Error("birthday error:", err)
@@ -39,7 +39,7 @@ func NewPet(userIdStr string, petName string, gender string, breed string, birth
 	}
 
 	var adoptaversary time.Time
-	adoptaversary, err = time.Parse("20211014", adoptaversaryStr)
+	adoptaversary, err = time.Parse("2006-01-02", adoptaversaryStr)
 	logrus.Println(adoptaversaryStr)
 	logrus.Println(adoptaversary)
 	logrus.Error("adoptaversary error:", err)
