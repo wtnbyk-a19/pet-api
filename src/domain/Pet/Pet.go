@@ -1,6 +1,7 @@
 package Pet
 
 import (
+	"github.com/sirupsen/logrus"
 	"pet-api/src/domain/Model"
 	"strconv"
 	"time"
@@ -29,13 +30,19 @@ func NewPet(userIdStr string, petName string, gender string, breed string, birth
 	}
 
 	var birthday time.Time
-	birthday, err = time.Parse("20211107", birthdayStr)
+	birthday, err = time.Parse("20211014", birthdayStr)
+	logrus.Println(birthdayStr)
+	logrus.Println(birthday)
+	logrus.Error("birthday error:", err)
 	if err != nil {
 		return pet, err
 	}
 
 	var adoptaversary time.Time
-	adoptaversary, err = time.Parse("20211107", adoptaversaryStr)
+	adoptaversary, err = time.Parse("20211014", adoptaversaryStr)
+	logrus.Println(adoptaversaryStr)
+	logrus.Println(adoptaversary)
+	logrus.Error("adoptaversary error:", err)
 	if err != nil {
 		return pet, err
 	}
